@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.yjb.view.sample.MainActivity">
+
+    <com.yjb.view.WaveProgressView
+        android:id="@+id/wpv_sample"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:wpvDirectionOne="left"
+        app:wpvDirectionTwo="right"
+        app:wpvMax="100"
+        app:wpvProgress="50"
+        app:wpvSpeed="fast"
+        app:wpvWaveAmplitudeRatioOne="0.5"
+        app:wpvWaveAmplitudeRatioTwo="0.25"
+        app:wpvWaveCountTwo="2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_start_animation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="开始流动"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btn_stop_animation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:padding="15dp"
+            android:text="停止流动"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

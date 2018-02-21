@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WaveProgressView">
+        <attr name="wpvCompletedText" format="reference|string" />
+        <attr name="wpvCircleColor" format="reference|color" />
+        <attr name="wpvTextColor" format="reference|color" />
+        <attr name="wpvCompletedTextColor" format="reference|color" />
+        <attr name="wpvWaveColorOne" format="reference|color" />
+        <attr name="wpvWaveColorTwo" format="reference|color" />
+        <attr name="wpvProgress" format="integer" />
+        <attr name="wpvMax" format="integer" />
+        <attr name="wpvWaveCountOne" format="integer" />
+        <attr name="wpvWaveCountTwo" format="integer" />
+        <attr name="wpvWaveAmplitudeRatioOne" format="float" />
+        <attr name="wpvWaveAmplitudeRatioTwo" format="float" />
+        <attr name="wpvStepAbsOne" format="reference|dimension" />
+        <attr name="wpvStepAbsTwo" format="reference|dimension" />
+        <attr name="wpvDirectionOne">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+        <attr name="wpvDirectionTwo">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+        <attr name="wpvShowType">
+            <enum name="both" value="0" />
+            <enum name="one" value="1" />
+            <enum name="two" value="2" />
+        </attr>
+        <attr name="wpvSpeed">
+            <enum name="slow" value="150" />
+            <enum name="normal" value="100" />
+            <enum name="fast" value="50" />
+        </attr>
+    </declare-styleable>
+</resources>
