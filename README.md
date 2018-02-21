@@ -2,7 +2,7 @@
 A custom circle view with one or two waves and a progress text.
 The height of the waves depends on the progress and max value.
 
-<img src="/image/WaveProgressViewSample.gif"/>
+<img src="/image/WaveProgressViewSample.gif" width="272" height="480"/>
 
 Features
 -----
