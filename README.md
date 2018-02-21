@@ -15,7 +15,7 @@ Features
 Install
 --------
 
-1. Copy the musicplayer-VERSION.aar into the libs directory of your app module.
+1. Copy the waveprogressview-VERSION.aar into the libs directory of your app module.
 2. Add the following code into the build.gradle (Module: app):
 ```groovy
 compile fileTree(include: ['*.jar'], dir: 'libs')
