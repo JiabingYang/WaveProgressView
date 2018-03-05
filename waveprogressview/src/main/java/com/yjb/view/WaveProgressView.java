@@ -49,8 +49,6 @@ public class WaveProgressView extends View {
     private Paint mTextPaint;
     private Paint mWavePaintOne, mWavePaintTwo;
     private Path mPath = new Path();
-    private Bitmap mBitmap;
-    private Canvas mBitmapCanvas;
     private AnimationThread mAnimationThread;
 
     public WaveProgressView(Context context, @Nullable AttributeSet attrs) {
@@ -275,12 +273,12 @@ public class WaveProgressView extends View {
         mWavePaintOne = new Paint();
         mWavePaintOne.setAntiAlias(true);
         mWavePaintOne.setColor(mWaveColorOne);
-        mWavePaintOne.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        mWavePaintOne.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
 
         mWavePaintTwo = new Paint();
         mWavePaintTwo.setAntiAlias(true);
         mWavePaintTwo.setColor(mWaveColorTwo);
-        mWavePaintTwo.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        mWavePaintTwo.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
 
         mTextPaint = new Paint();
         mTextPaint.setAntiAlias(true);
@@ -294,8 +292,6 @@ public class WaveProgressView extends View {
         mViewHeightPx = h;
 
         mRadiusPx = Math.min(mViewWidthPx, mViewHeightPx) / 2.0f;
-        mBitmap = Bitmap.createBitmap((int) mRadiusPx * 2, (int) mRadiusPx * 2, Bitmap.Config.ARGB_8888);
-        mBitmapCanvas = new Canvas(mBitmap);
 
         calculateWaveParams();
 
@@ -328,8 +324,9 @@ public class WaveProgressView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        canvas.saveLayer(0, 0, mViewWidthPx, mViewHeightPx, null, Canvas.ALL_SAVE_FLAG);
         //画圆
-        mBitmapCanvas.drawCircle(mViewWidthPx / 2, mViewHeightPx / 2, mRadiusPx, mCirclePaint);
+        canvas.drawCircle(mViewWidthPx / 2, mViewHeightPx / 2, mRadiusPx, mCirclePaint);
 
         if (mShowType == ShowType.BOTH || mShowType == ShowType.ONE) {
             //画波1
@@ -342,7 +339,7 @@ public class WaveProgressView extends View {
             mPath.lineTo(mViewWidthPx / 2 + mRadiusPx, mViewHeightPx / 2 + mRadiusPx);
             mPath.lineTo(mViewWidthPx / 2 - mRadiusPx, mViewHeightPx / 2 + mRadiusPx);
             mPath.close();
-            mBitmapCanvas.drawPath(mPath, mWavePaintOne);
+            canvas.drawPath(mPath, mWavePaintOne);
         }
         if (mShowType == ShowType.BOTH || mShowType == ShowType.TWO) {
             //画波2
@@ -355,7 +352,7 @@ public class WaveProgressView extends View {
             mPath.lineTo(mViewWidthPx / 2 + mRadiusPx, mViewHeightPx / 2 + mRadiusPx);
             mPath.lineTo(mViewWidthPx / 2 - mRadiusPx, mViewHeightPx / 2 + mRadiusPx);
             mPath.close();
-            mBitmapCanvas.drawPath(mPath, mWavePaintTwo);
+            canvas.drawPath(mPath, mWavePaintTwo);
         }
         //画进度文字
         mTextPaint.setTextSize(mRadiusPx / 3);
@@ -369,8 +366,8 @@ public class WaveProgressView extends View {
         }
         float textWidth = mTextPaint.measureText(text);
         Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
-        mBitmapCanvas.drawText(text, mViewWidthPx / 2 - textWidth / 2, mViewHeightPx / 2 - (fontMetrics.descent + fontMetrics.ascent) / 2, mTextPaint);
-        canvas.drawBitmap(mBitmap, 0, 0, null);
+        canvas.drawText(text, mViewWidthPx / 2 - textWidth / 2, mViewHeightPx / 2 - (fontMetrics.descent + fontMetrics.ascent) / 2, mTextPaint);
+        canvas.restore();
     }
 
     private void moveWave() {
